@@ -1,67 +1,56 @@
-let pedido = 1;
-let precio = 150;
-let total = 0;
+let pedir = 1;
+const pedido  = [];
 
-let empanada1 = '';
-let empanada2 = '';
-let empanada3 = '';
-let cantidad = 0;
-let resultado = 0;
+class empanada {
+    constructor(id,nombre,precio){
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = parseFloat(precio);
+    }
+}
 
-let suma1 = 0;
-let suma2 = 0;
-let suma3 = 0;
+const empadadas = [];
 
-while (pedido != 0) {
-    let gustoDeEmpanada = prompt('escriba 1 para empanadas de carne, escriba 2 para empanadas de pollo, escriba 3 para empanadas de jamon y queso');
-
-
+empadadas.push(new empanada (1,'carne', 150));
+empadadas.push(new empanada (2,'pollo', 140));
+empadadas.push(new empanada (3,'jamon y queso', 120));
 
 
-    switch (gustoDeEmpanada) {
-        case '1':
-            empanada1 = 'carne'
-            cantidad = parseInt(prompt(`ingrese la cantidad de empanadas de ${empanada1}`));
-
-            suma1 = suma1 + cantidad;
-            
-            break;
-        case '2':
-            empanada2 = 'pollo'
-            cantidad = parseInt(prompt(`ingrese la cantidad de empanadas de ${empanada2}`));
-            suma2 = suma2 + cantidad;
-
-            break;
-        case '3':
-            empanada3 = 'jamon y queso'
-            cantidad = parseInt(prompt(`ingrese la cantidad de empanadas de ${empanada3}`));
-            suma3 = suma3 + cantidad;
-
-            break;
-
-        default:
-            alert('el gusto de la empanada no existe');
-            break;
-    }   
-
+const agregarPedido = (nombreEmpanada,cantidad) =>{
     
-
-    pedido = parseInt(prompt('precione 0 para terminar con la seleccion o cualquier 1 para seguir agregar mas empanadas'));
+    const articulo = empadadas.find ((emp) => emp.nombre === nombreEmpanada)
+    
+    for(let i = 0; i < cantidad; i++){
+    pedido.push(articulo)
+    }
 }
 
-if (suma1 > 0) {
-    alert(`eligio ${suma1} empanadas de carne`)
-}
-if (suma2 > 0) {
-    alert(`eligio ${suma2} empanadas de pollo`)
-}
-if (suma3 > 0) {
-    alert(`eligio ${suma3} empanadas de jamon y queso`)
+while(pedir != 0){
+    let gusto = prompt('ingrese el gusto de empanada');
+    let cantidad = prompt ('ingrese la cantidad');
+    agregarPedido(gusto, cantidad)
+
+
+pedir = prompt('ingrese 0 para terminar o cualquier tecla para seguir')
 }
 
-const contarEmpandas = (suma1,suma2,suma3) =>{
-    return  ((suma1 + suma2 + suma3) * precio)
-}
-resultado = parseFloat(contarEmpandas(suma1,suma2,suma3))
+let total = pedido.reduce((acumulador, articulo) => acumulador + articulo.precio, 0)
 
-alert(`ud debe pagar ${resultado}`);
+articulosPedidos = (pedido, mostrarPedido) =>{
+    for(const el of pedido){
+        return mostrarPedido(el.nombre)
+    }
+}
+
+articulosPedidos(pedido,console.log())
+        
+ 
+
+
+alert(`Su pedido esta compuesto por ${mostrarPedido} y su precio total es ${total}`)
+
+
+
+
+
+
